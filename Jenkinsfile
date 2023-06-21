@@ -6,32 +6,43 @@ pipeline {
     }
 
     stages {
-        stage('check') {
-            steps {
-                echo "checking your code"
-                echo "${params.namespace}"
-               
-            }
-        }
-        stage('Build and Push Docker Image') {
-            when {
-                expression{
-                    params.Test-Jenkins == true 
+        stages {
+            stage('check') {
+                steps {
+                    echo "checking your code"
+                    echo "${params.namespace}"
+                    echo "linting your code"
+                    echo "running unit tests"
                 }
             }
-            steps {
-                sh "docker build -t amrabunemr98/sprintsjenkins:2 ."
-                sh "docker push -t amrabunemr98/sprintsjenkins:2"
-                echo "Push Docker Image is successed" 
-            }
-        }
-        
-        stage('deployment') {  
-            steps {
-                echo "your code is deployed right now"
-                echo "this build number $BUILD_NUMBER"
-            }
-        }    
-    }
 
+            stage('build') {
+                steps {
+                    echo "building your code"
+                    echo "installing dependencies"
+                    echo "configuring the environment"
+                }
+            }
+
+            stage('test') {
+                when {
+                expression{
+                    params.project == true 
+                }
+            }
+                steps {
+                    echo "testing your app" 
+                }
+            }
+            
+            stage('deployment') {  
+                steps {
+                    echo "deploying your code to staging environment"
+                    echo "creating a release"
+                    echo "sending notifications"
+                }
+            }    
+        }
+    }
 }
+
