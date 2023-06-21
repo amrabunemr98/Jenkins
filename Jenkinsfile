@@ -24,7 +24,7 @@ pipeline {
             }
             steps {
                 sh "docker build -t amrabunemr98/sprintsjenkins:$BUILD_TAG ."
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh "echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
                 sh "docker push amrabunemr98/sprintsjenkins:$BUILD_TAG"
                 echo "Push Docker Image is successed" 
             }
