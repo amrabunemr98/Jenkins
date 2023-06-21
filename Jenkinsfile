@@ -21,7 +21,7 @@ pipeline {
             }
             steps {
                 sh "docker build -t amrabunemr98/sprintsjenkins:2 ."
-                sh "docker push amrabunemr98/sprintsjenkins:2"
+                sh "docker push -t amrabunemr98/sprintsjenkins:2"
                 echo "Push Docker Image is successed" 
             }
         }
