@@ -16,13 +16,12 @@ pipeline {
         stage('Build and Push Docker Image') {
             when {
                 expression{
-                    params.project == true 
+                    params.Test-Jenkins == true 
                 }
             }
             steps {
-                sh 'docker build -t amrabunemr98/sprintsjenkins:$BUILD_TAG.'
-                sh 'docker login -u $User -p $Password'
-                sh 'docker push amrabunemr98/sprintsjenkins:$BUILD_TAG'
+                sh "docker build -t amrabunemr98/sprintsjenkins:${BUILD_TAG} ."
+                sh "docker push amrabunemr98/sprintsjenkins:${BUILD_TAG}"
                 echo "Push Docker Image is successed" 
             }
         }
