@@ -1,7 +1,7 @@
 pipeline {
-    agent any
+     agent any
     parameters {
-        booleanParam(name:'Test-Jenkins', defaultValue: true, description:'this paramater help you to know project name')
+        booleanParam(name:'Test', defaultValue: true, description:'this paramater help you to know project name')
         choice(name: 'namespace', choices:['Development','Testing','Production'], description: '' ) 
     }
     stages {
@@ -25,7 +25,7 @@ pipeline {
             stage('test') {
                 when {
                     expression{
-                        params.Test-Jenkins == true 
+                        params.Test == true 
                     }
                 }
                 steps {
@@ -40,6 +40,6 @@ pipeline {
                     echo "sending notifications"
                 }
             }    
-        }
     }
+}
 
