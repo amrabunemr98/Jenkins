@@ -24,10 +24,10 @@ pipeline {
 
             stage('test') {
                 when {
-                expression{
-                    params.Test-Jenkins == true 
+                    expression{
+                        params.Test-Jenkins == true 
+                    }
                 }
-            }
                 steps {
                     echo "testing your app" 
                 }
