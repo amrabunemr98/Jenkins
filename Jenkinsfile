@@ -1,13 +1,11 @@
 pipeline {
+    agent any
     environment {
-        registry = "amrabunemr98/sprintsjenkins"
-        registryCredential = 'docker-hub'
+        DOCKERHUB_CREDENTIALS= credentials('docker-hub')
     }
-     agent any
     parameters {
         booleanParam(name:'Test-Jenkins', defaultValue: true, description:'this paramater help you to know project name')
         choice(name: 'namespace', choices:['Development','Testing','Production'], description: '' ) 
-        string(name:'BUILD_TAG', defaultValue: 'latest', description:'this paramater help you to know build tag')
     }
 
     stages {
@@ -25,8 +23,9 @@ pipeline {
                 }
             }
             steps {
-                sh "docker build -t registry:${BUILD_TAG} ."
-                sh "docker push registry:${BUILD_TAG}"
+                sh "docker build -t amrabunemr98/sprintsjenkins:$BUILD_TAG ."
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh "docker push amrabunemr98/sprintsjenkins:$BUILD_TAG"
                 echo "Push Docker Image is successed" 
             }
         }
