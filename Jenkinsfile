@@ -3,7 +3,7 @@ pipeline {
     parameters {
         booleanParam(name:'Test-Jenkins', defaultValue: true, description:'this paramater help you to know project name')
         choice(name: 'namespace', choices:['Development','Testing','Production'], description: '' ) 
-        stringParam(name:'BUILD_TAG', defaultValue: 'latest', description:'this paramater help you to know build tag')
+        string(name:'BUILD_TAG', defaultValue: 'latest', description:'this paramater help you to know build tag')
     }
 
     stages {
