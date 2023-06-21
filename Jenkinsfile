@@ -20,8 +20,8 @@ pipeline {
                 }
             }
             steps {
-                sh "docker build -t amrabunemr98/sprintsjenkins:${BUILD_TAG} ."
-                sh "docker push amrabunemr98/sprintsjenkins:${BUILD_TAG}"
+                sh "docker build -t amrabunemr98/sprintsjenkins:$BUILD_TAG ."
+                sh "docker push amrabunemr98/sprintsjenkins:$BUILD_TAG"
                 echo "Push Docker Image is successed" 
             }
         }
