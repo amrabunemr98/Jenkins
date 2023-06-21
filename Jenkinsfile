@@ -4,9 +4,7 @@ pipeline {
         booleanParam(name:'Test-Jenkins', defaultValue: true, description:'this paramater help you to know project name')
         choice(name: 'namespace', choices:['Development','Testing','Production'], description: '' ) 
     }
-
     stages {
-        stages {
             stage('check') {
                 steps {
                     echo "checking your code"
@@ -27,7 +25,7 @@ pipeline {
             stage('test') {
                 when {
                 expression{
-                    params.project == true 
+                    params.Test-Jenkins == true 
                 }
             }
                 steps {
@@ -44,5 +42,4 @@ pipeline {
             }    
         }
     }
-}
 
